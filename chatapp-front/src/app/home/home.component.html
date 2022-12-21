@@ -1,0 +1,7 @@
+<button (click)="logOut()">Log Out</button>
+<div class="container">
+    <div *ngFor="let msg of messages" class="message">
+        <h5>{{msg.author.name}}</h5>
+        <p>{{msg.message}}</p>
+    </div>
+</div>

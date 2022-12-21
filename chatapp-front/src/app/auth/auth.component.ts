@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { pb } from 'src/app/app.component';
+import { pb } from 'src/main'
 
 @Component({
   selector: 'app-auth',
@@ -18,34 +18,37 @@ export class AuthComponent{
     this.loading = true;
     this.response.exist = false;
     try {
-
       await pb.collection('users').authWithPassword(username,pass);
-      
-      // after the above you can also access the auth data from the authStore
-      console.log(pb.authStore.isValid);
-      console.log(pb.authStore.token);
-      if (pb.authStore.model){
-        console.log(pb.authStore.model.id);
-      }
-    this.response = generateResponse(true);
+      this.response = generateResponse(true);
 
     } catch (error) {
-      console.log("error",error);
       this.response = generateResponse(false);
     }
 
     this.loading = false;
   }
 
-  singup(username : string ,pass : string) {
-    console.log("singn up with : ",username,pass);
+  async singup(username : string ,pass : string) {
+    this.loading = true;
+    this.response.exist = false;
+    try{
+      const record = await pb.collection('users').create({"username": username,"password": pass, "passwordConfirm": pass,});
+      this.response = generateResponse(true, false);
+    }catch (error){
+      this.response = generateResponse(false, false);
+    }
+    this.loading = false
   }
 }
 
-function generateResponse(state : boolean) : any{
+function generateResponse(state : boolean , log : boolean = true) : any{
   return {
     state : (state) ? "succes" : "error",
-    message : (state) ? "You're loged in" : "Error while login",
+    message : (state) ? (log)? "You're loged in" : "You're signed in" : (log)? "Error while login": "Error while Signing in",
     exist : true,
   };
+}
+
+export function logOut(){
+  pb.authStore.clear();
 }

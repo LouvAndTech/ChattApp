@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import PocketBase from 'pocketbase';
-
-export const pb = new PocketBase('http://127.0.0.1:8090');
+import {pb} from 'src/main'
 
 @Component({
   selector: 'app-root',
@@ -11,7 +9,8 @@ export const pb = new PocketBase('http://127.0.0.1:8090');
 export class AppComponent {
   title = 'chatapp-front';
 
-  logedIn : boolean = pb.authStore.isValid;
+  pb = pb
+  
 
 }
 
