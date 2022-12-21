@@ -15,20 +15,22 @@ export class HomeComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;       
+    this.bottomMessage();
   } 
 
-  
+  bottomMessage(){
+    this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
+  }
 
   async fetchMessages(start : number) : Promise<any>{
     // fetch a paginated records list
     let response = await pb.collection('messages').getList(start, 10, {
-      sort: 'created',
+      sort: '-created',
       expand: 'user',
     });
     
 
-    response.items.forEach(res => {
+    response.items.reverse().forEach(res => {
       this.messages.push(new Messages(res));
     })
 
