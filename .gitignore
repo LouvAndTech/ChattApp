@@ -1,4 +1,4 @@
-./chatapp-back/pb_data/*
+chatapp-back/pb_data/*
 
 # Visual Studio Code
 .vscode/*
@@ -11,3 +11,4 @@
 # System files
 .DS_Store
 Thumbs.db
+
