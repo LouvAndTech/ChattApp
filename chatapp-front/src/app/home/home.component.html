@@ -5,6 +5,6 @@
     </div>
 </div>
 <div class="newMessage">
-    <input #message type="text" placeholder="Enter your message here">
+    <input #message (keyup.enter)="newMessage(message.value)" type="text" placeholder="Enter your message here">
     <button (click)="newMessage(message.value)">Send it</button>
 </div>

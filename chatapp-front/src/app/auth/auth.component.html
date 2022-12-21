@@ -1,7 +1,7 @@
 <div class="container">
     <h1>Connection</h1>
     <input #username type="text" placeholder="username">
-    <input #pass type="password" placeholder="password">
+    <input #pass (keyup.enter)="login(username.value, pass.value)" type="password" placeholder="password">
 
     <div class="buttons">
         <button (click)="login(username.value, pass.value)" class="button" type="submit">Log in</button>

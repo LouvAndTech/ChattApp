@@ -13,6 +13,7 @@ export class AppComponent {
 
   ngOnInit(){
     pb.authStore.clear();
+    console.log(window.location.href);
   }
 
 }
