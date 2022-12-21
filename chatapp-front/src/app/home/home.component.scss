@@ -3,6 +3,10 @@
     padding: 3px;
     margin: 2px;
 
+    height: 75vh;
+    overflow: scroll;
+    scroll-behavior: smooth;
+
     .message{
         padding: 3px;
         margin: 2px;
@@ -11,4 +15,34 @@
         border-color: rgb(45, 147, 113);
         
     }
+
+    
+}
+.newMessage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    border: 2px solid;
+    border-color: bisque;
+
+    height: 10vh;
+
+    input {
+        color: black;
+        margin: 5%;
+        width: 90%;
+        height: 90%;
+    }
+
+    button {
+        margin: 2vw;
+        color: black;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 5px;
+        background-color: bisque;
+    }
+    
 }

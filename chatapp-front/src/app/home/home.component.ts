@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { logOut } from '../auth/auth.component';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { pb } from 'src/main';
 
 @Component({
@@ -8,32 +7,43 @@ import { pb } from 'src/main';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  logOut = logOut
   messages :Messages[] = [];
+  @ViewChild('messageContainer') messageContainer !: ElementRef;
 
   ngOnInit(): void {
     this.fetchMessages(1);
-    
-
-    
   }
+
+  ngAfterViewChecked() {
+    this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;       
+  } 
+
+  
 
   async fetchMessages(start : number) : Promise<any>{
     // fetch a paginated records list
-    let response = await pb.collection('messages').getList(start, 50, {
+    let response = await pb.collection('messages').getList(start, 10, {
       sort: 'created',
       expand: 'user',
     });
     
-    console.log(response.items);
 
     response.items.forEach(res => {
-      console.log(res);
       this.messages.push(new Messages(res));
     })
 
-    console.log(this.messages);
   }
+
+  async newMessage(message : string){
+    if(pb.authStore.model)
+      await pb.collection('messages').create({
+        "field": message,
+        "user": pb.authStore.model.id,
+      });
+      this.messages = [];
+      this.fetchMessages(1);
+  }
+
 }
 
 class Messages{

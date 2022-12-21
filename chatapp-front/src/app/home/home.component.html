@@ -1,7 +1,10 @@
-<button (click)="logOut()">Log Out</button>
-<div class="container">
+<div class="container" #messageContainer>
     <div *ngFor="let msg of messages" class="message">
         <h5>{{msg.author.name}}</h5>
         <p>{{msg.message}}</p>
     </div>
+</div>
+<div class="newMessage">
+    <input #message type="text" placeholder="Enter your message here">
+    <button (click)="newMessage(message.value)">Send it</button>
 </div>

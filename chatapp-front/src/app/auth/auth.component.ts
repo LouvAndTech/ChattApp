@@ -20,7 +20,6 @@ export class AuthComponent{
     try {
       await pb.collection('users').authWithPassword(username,pass);
       this.response = generateResponse(true);
-
     } catch (error) {
       this.response = generateResponse(false);
     }
@@ -32,7 +31,12 @@ export class AuthComponent{
     this.loading = true;
     this.response.exist = false;
     try{
-      const record = await pb.collection('users').create({"username": username,"password": pass, "passwordConfirm": pass,});
+      await pb.collection('users').create({
+        "username": username,
+        "name":username,
+        "password": pass,
+        "passwordConfirm": pass,
+      });
       this.response = generateResponse(true, false);
     }catch (error){
       this.response = generateResponse(false, false);

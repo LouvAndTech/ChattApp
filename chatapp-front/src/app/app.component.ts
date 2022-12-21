@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {pb} from 'src/main'
 
 @Component({
@@ -10,7 +10,10 @@ export class AppComponent {
   title = 'chatapp-front';
 
   pb = pb
-  
+
+  ngOnInit(){
+    pb.authStore.clear();
+  }
 
 }
 
