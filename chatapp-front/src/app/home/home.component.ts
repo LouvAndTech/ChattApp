@@ -1,5 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { pb } from 'src/main';
+
+const messageperpage = 6;
 
 @Component({
   selector: 'app-home',
@@ -15,22 +17,29 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.fetchMessages(1);
     this.subscibe();
-  }
-
-  //Each time a change append in the view scroll to the last message
-  ngAfterViewChecked() {
     this.bottomMessage();
-  } 
+  }
 
   //Scroll to the last message in the list
-  bottomMessage(){
-    this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
+  private bottomMessage(){
+    try {
+      this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
+    } catch(err) {
+      console.log(err);
+    }  
   }
 
+  /*
+  Work only on new message and not on load
+  And stop at the n-1 message
+  ngAfterViewInit() {
+    this.bottomMessage();
+  }*/
+
   //Fetch the last 10 messages
-  async fetchMessages(start : number) : Promise<any>{
+  private async fetchMessages(start : number) : Promise<any>{
     // fetch a paginated records list
-    let response = await pb.collection('messages').getList(start, 10, {
+    let response = await pb.collection('messages').getList(start, messageperpage, {
       sort: '-created',
       expand: 'user',
     });
@@ -41,18 +50,46 @@ export class HomeComponent implements OnInit {
   }
 
   //subscribe to the fil of messages
-  subscibe(){
-    pb.collection('messages').subscribe('*', e => this.updateFil(e));
+  private subscibe(){
+    pb.collection('messages').subscribe('*', e => {
+      this.updateFil(e)
+    });
+  }
+
+  //When the user scroll to the top of the list fetch the next 10 messages
+  onScroll(){
+    //when on top of the list
+    if (this.messageContainer.nativeElement.scrollTop == 0){
+      this.loadMore();
+    }
+  }
+
+  async loadMore(){
+    //fetch the next 10 messages
+    try{
+      var response = await pb.collection('messages').getList(1, messageperpage, {
+        filter: 'created < "' + this.messages[0].date + '"',
+        sort: '-created',
+        expand: 'user',
+      });
+      //add the messages to the list at the top
+      response.items.forEach(res => {
+        this.messages.unshift(new Messages(res));
+      })
+    }catch(e){
+      console.log(e);
+    }
   }
 
   //NewMessage arrive 
-  async updateFil(e : any){
+  private async updateFil(e : any){
     e.record.expand.user = await pb.collection('users').getOne(e.record.user, {});
     this.messages.push(new Messages(e.record));
+    await this.bottomMessage();
   }
   
   //Send a new message
-  async newMessage(message : string){
+  async sendMessage(message : string){
     //Empty the field
     this.inputMessage.nativeElement.value = null;
     //create a new message in the db
@@ -66,10 +103,12 @@ export class HomeComponent implements OnInit {
 }
 
 class Messages{
+  date : string;
   author : any;
   message : string;
 
   constructor(entity:any){
+    this.date = entity.created;
     this.message = entity.field;
     this.author = {
       name : entity.expand.user.name,

@@ -7,6 +7,16 @@
     overflow: scroll;
     scroll-behavior: smooth;
 
+    button {
+        justify-self: center;
+        margin: 2vw;
+        color: black;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 5px;
+        background-color: bisque;
+    }
+
     .message{
         padding: 8px;
         margin: 2px;

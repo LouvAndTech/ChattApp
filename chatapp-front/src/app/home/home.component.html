@@ -1,10 +1,11 @@
-<div class="container" #messageContainer>
+<div class="container" (scroll)="onScroll()" #messageContainer>
+    <button (click)="loadMore()">Load more messages</button>
     <div *ngFor="let msg of messages" class="message">
         <h5>{{msg.author.name}}</h5>
         <p>{{msg.message}}</p>
     </div>
 </div>
 <div class="newMessage">
-    <input #message (keyup.enter)="newMessage(message.value)" type="text" placeholder="Enter your message here">
-    <button (click)="newMessage(message.value)">Send it</button>
+    <input #message (keyup.enter)="sendMessage(message.value)" type="text" placeholder="Enter your message here">
+    <button (click)="sendMessage(message.value)">Send it</button>
 </div>
