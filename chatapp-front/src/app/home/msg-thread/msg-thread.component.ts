@@ -12,6 +12,7 @@ export class MsgThreadComponent implements OnInit {
 
   messages :Messages[] = [];
   loading : boolean = false;
+  allMessagesLoaded : boolean = false;
 
   @ViewChild('messageContainer') messageContainer !: ElementRef;
   //On init fetch the messages
@@ -67,7 +68,7 @@ export class MsgThreadComponent implements OnInit {
     //When the user scroll to the top of the list fetch the next 10 messages
     onScroll(){
       //when on top of the list
-      if (this.messageContainer.nativeElement.scrollTop == 0){
+      if (this.messageContainer.nativeElement.scrollTop == 0 && !this.loading && !this.allMessagesLoaded){
         this.loadMore();
       }
     }
@@ -82,6 +83,10 @@ export class MsgThreadComponent implements OnInit {
           sort: '-created',
           expand: 'user',
         });
+        //If there is no more messages
+        if (response.items.length < messageperpage){
+          this.allMessagesLoaded = true;
+        }
         //add the messages to the list at the top
         response.items.forEach(res => {
           this.messages.unshift(new Messages(res));
