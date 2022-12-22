@@ -1,11 +1,2 @@
-<div class="container" (scroll)="onScroll()" #messageContainer>
-    <button (click)="loadMore()">Load more messages</button>
-    <div *ngFor="let msg of messages" class="message">
-        <h5>{{msg.author.name}}</h5>
-        <p>{{msg.message}}</p>
-    </div>
-</div>
-<div class="newMessage">
-    <input #message (keyup.enter)="sendMessage(message.value)" type="text" placeholder="Enter your message here">
-    <button (click)="sendMessage(message.value)">Send it</button>
-</div>
+<app-msg-thread></app-msg-thread>
+<app-new-message></app-new-message>

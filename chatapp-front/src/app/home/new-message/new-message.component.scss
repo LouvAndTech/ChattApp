@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    border: 2px solid;
+    border-color: bisque;
+
+    height: 10vh;
+
+    input {
+        color: black;
+        margin: 5%;
+        width: 90%;
+        height: 90%;
+    }
+
+    button {
+        margin: 2vw;
+        color: black;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 5px;
+        background-color: bisque;
+    }
+    
+}
