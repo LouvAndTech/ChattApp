@@ -46,6 +46,8 @@ export class MsgThreadComponent implements OnInit {
         sort: '-created',
         expand: 'user',
       });
+      
+      console.log(response);
       //add the messages to the list
       response.items.reverse().forEach(res => {
         this.messages.push(new Messages(res));
@@ -118,12 +120,13 @@ export class MsgThreadComponent implements OnInit {
     date : string;
     author : any;
     message : string;
-  
+    
     constructor(entity:any){
       this.date = entity.created;
       this.message = entity.field;
       this.author = {
         name : entity.expand.user.name,
+        avatar : pb.getFileUrl(entity.expand.user, entity.expand.user.avatar),
       }
     }
   }

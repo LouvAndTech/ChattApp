@@ -34,7 +34,10 @@
     
 
     <div *ngFor="let msg of messages" class="message">
-        <h5>{{msg.author.name}}</h5>
+        <div class="header">
+            <div class="avatar" style="background-image: url('{{msg.author.avatar}}');"></div>
+            <h5>{{msg.author.name}}</h5>
+        </div>
         <p>{{msg.message}}</p>
     </div>
 </div>
