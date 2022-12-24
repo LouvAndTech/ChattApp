@@ -7,7 +7,7 @@ import {pb} from 'src/main'
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'chatapp-front';
+  title = 'ChatApp - LouvAndTech';
 
   pb = pb
 

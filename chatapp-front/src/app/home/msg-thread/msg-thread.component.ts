@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { pb } from 'src/main';
 
-const messageperpage = 6;
+const messageperpage = 15;
 
 @Component({
   selector: 'app-msg-thread',
