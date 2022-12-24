@@ -1,46 +1,48 @@
 <div class="container">
-    <h1>Connection</h1>
-    <input #username type="text" placeholder="username">
-    <input #pass (keyup.enter)="login(username.value, pass.value)" type="password" placeholder="password">
+    <div class="form">
+        <h1>Log In</h1>
+        <input #username type="text" placeholder="Username">
+        <input #pass (keyup.enter)="login(username.value, pass.value)" type="password" placeholder="Password">
 
-    <div class="buttons">
-        <button (click)="login(username.value, pass.value)" class="button" type="submit">Log in</button>
-        <button (click)="singup(username.value, pass.value)" class="button" type="submit">Sign in</button>
-    </div>
+        <div class="buttons">
+            <button (click)="login(username.value, pass.value)" class="button" type="submit">Log in</button>
+            <button (click)="singup(username.value, pass.value)" class="button" type="submit">Sign in</button>
+        </div>
 
 
-    <!-- Loading message -->
-    <div class="loading" *ngIf="loading">
-        <svg version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-        viewBox="0 0 50 75" enable-background="new 0 0 0 0" xml:space="preserve">
-        <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
-            <animate
-            attributeName="opacity"
-            dur="1s"
-            values="0;1;0"
-            repeatCount="indefinite"
-            begin="0.1"/>    
-        </circle>
-        <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
-            <animate
-            attributeName="opacity"
-            dur="1s"
-            values="0;1;0"
-            repeatCount="indefinite" 
-            begin="0.2"/>       
-        </circle>
-        <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
-            <animate
-            attributeName="opacity"
-            dur="1s"
-            values="0;1;0"
-            repeatCount="indefinite" 
-            begin="0.3"/>     
-        </circle>
-        </svg>
-    </div>
+        <!-- Loading message -->
+        <div class="loading" *ngIf="loading">
+            <svg version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="0 0 50 75" enable-background="new 0 0 0 0" xml:space="preserve">
+            <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
+                <animate
+                attributeName="opacity"
+                dur="1s"
+                values="0;1;0"
+                repeatCount="indefinite"
+                begin="0.1"/>    
+            </circle>
+            <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
+                <animate
+                attributeName="opacity"
+                dur="1s"
+                values="0;1;0"
+                repeatCount="indefinite" 
+                begin="0.2"/>       
+            </circle>
+            <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
+                <animate
+                attributeName="opacity"
+                dur="1s"
+                values="0;1;0"
+                repeatCount="indefinite" 
+                begin="0.3"/>     
+            </circle>
+            </svg>
+        </div>
 
-    <div class="response {{response.state}}" *ngIf="response.exist">
-        {{ response.message }}
+        <div class="response {{response.state}}" *ngIf="response.exist">
+            {{ response.message }}
+        </div>
     </div>
 </div>

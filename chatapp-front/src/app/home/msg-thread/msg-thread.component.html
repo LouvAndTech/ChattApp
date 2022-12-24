@@ -32,8 +32,7 @@
         <button *ngIf="!loading" (click)="loadMore()">Load more messages</button>
     </div>
     
-
-    <div *ngFor="let msg of messages" class="message">
+    <div *ngFor="let msg of messages" class="message {{(msg.author.id==pb.authStore.model!.id)?'user':'other'}}">
         <div class="header">
             <div class="avatar" style="background-image: url('{{msg.author.avatar}}');"></div>
             <h5>{{msg.author.name}}</h5>

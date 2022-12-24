@@ -2,27 +2,41 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
-    border: 2px solid;
-    border-color: bisque;
+    background-color: #1D2D44;
+    border-radius: 5px;
+    padding: 5px 5px;
 
     height: 10vh;
 
-    input {
-        color: black;
-        margin: 5%;
-        width: 90%;
-        height: 90%;
+    input{
+        color : #F0EBD8;
+        outline: none;
+        border: 0px;
+        border-bottom: 1px solid #F0EBD8;
+        background-color: #748CAB;
+        border-radius: 5px;
+        width: 80%;
+        height: 80%;
+        margin-right: 20px;
     }
 
     button {
-        margin: 2vw;
-        color: black;
-        border: 1px solid #ccc;
-        border-radius: 3px;
+        color: #3E5C76;
+        border: 0px;
+        border-radius: 5px;
+        padding: 5px 10px;
+        border: 1px solid transparent;
         padding: 5px;
-        background-color: bisque;
+
+        width: fit-content;
+        background-color: #F0EBD8;
+
+        &:hover {
+            cursor: pointer;
+            border: 1px solid #1D2D44;
+        }
     }
     
 }

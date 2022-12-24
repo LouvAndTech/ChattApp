@@ -11,57 +11,80 @@
     height: 90vh;
     width: 100vw;
 
-    h1 {
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #3E5C76;
+
+        padding: 30px 80px;
+        border-radius: 5px;
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
         
-        font-size: 2rem;
-        font-weight: 600;
-    }
+        input{
+            color : #F0EBD8;
+            outline: none;
+            border: 0px;
+            border-bottom: 1px solid #F0EBD8;
+            background-color: #748CAB;
+            border-radius: 5px;
+        }
     
-    input{
-        color : black;
-    }
+        .buttons{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+    
+            button {
+                color: #3E5C76;
+                border: 0px;
+                border-radius: 5px;
+                padding: 5px 10px;
+                border: 1px solid transparent;
+                margin: 5px;
+                background-color: #F0EBD8;
 
-    .buttons{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-
-        button {
-            color: black;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            padding: 5px;
-            background-color: bisque;
+                &:hover {
+                    cursor: pointer;
+                    border: 1px solid #1D2D44;
+                }
+            }
         }
-    }
-
-    .loading {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-
-        svg{
-            justify-self: center;
-            width: 50px;
-            height: 50px;
-            display: inline-block;
+    
+        .loading {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+    
+            svg{
+                justify-self: center;
+                width: 50px;
+                height: 50px;
+                display: inline-block;
+            }
         }
-    }
-
-    .response {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-
-        &.error {
-            color: red;
+    
+        .response {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+    
+            &.error {
+                color: red;
+            }
+            &.succes {
+                color: green;
+            }
         }
-        &.succes {
-            color: green;
-        }
+
     }
 }
 

@@ -9,6 +9,7 @@ const messageperpage = 6;
   styleUrls: ['./msg-thread.component.scss']
 })
 export class MsgThreadComponent implements OnInit {
+  pb = pb
 
   messages :Messages[] = [];
   loading : boolean = false;
@@ -127,6 +128,7 @@ export class MsgThreadComponent implements OnInit {
       this.author = {
         name : entity.expand.user.name,
         avatar : pb.getFileUrl(entity.expand.user, entity.expand.user.avatar),
+        id: entity.expand.user.id,
       }
     }
   }
