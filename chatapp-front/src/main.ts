@@ -8,7 +8,7 @@ import PocketBase from 'pocketbase';
 
 //IMPORTANT TO CHANGE BEFORE DEPLOYMENT
 //export const pb = new PocketBase('http://localhost:8090');
-export const pb = new PocketBase('http://chat.elouan-lerissel.fr');
+export const pb = new PocketBase('https://chat.elouan-lerissel.fr');
 
 if (environment.production) {
   enableProdMode();
