@@ -1,48 +1,26 @@
 <div class="container">
+    <div class="intro">
+        <img src="favicon.ico" alt="" style="width: 100px; height: 100px;">
+        <h1>Le Moulin Chat</h1>
+    </div>
+
     <div class="form">
-        <h1>Log In</h1>
         <input #username type="text" placeholder="Username">
         <input #pass (keyup.enter)="login(username.value, pass.value)" type="password" placeholder="Password">
 
         <div class="buttons">
             <button (click)="login(username.value, pass.value)" class="button" type="submit">Log in</button>
-            <button (click)="singup(username.value, pass.value)" class="button" type="submit">Sign in</button>
-        </div>
-
-
-        <!-- Loading message -->
-        <div class="loading" *ngIf="loading">
-            <svg version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            viewBox="0 0 50 75" enable-background="new 0 0 0 0" xml:space="preserve">
-            <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
-                <animate
-                attributeName="opacity"
-                dur="1s"
-                values="0;1;0"
-                repeatCount="indefinite"
-                begin="0.1"/>    
-            </circle>
-            <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
-                <animate
-                attributeName="opacity"
-                dur="1s"
-                values="0;1;0"
-                repeatCount="indefinite" 
-                begin="0.2"/>       
-            </circle>
-            <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
-                <animate
-                attributeName="opacity"
-                dur="1s"
-                values="0;1;0"
-                repeatCount="indefinite" 
-                begin="0.3"/>     
-            </circle>
-            </svg>
-        </div>
-
-        <div class="response {{response.state}}" *ngIf="response.exist">
-            {{ response.message }}
+            <button (click)="singup(username.value, pass.value)" class="button" type="submit">Sign in</button   >
         </div>
     </div>
+
+    <div class="loading" *ngIf="loading">
+        <img src="https://samherbert.net/svg-loaders/svg-loaders/oval.svg">
+    </div>
+
+    <div class="response {{response.state}}" *ngIf="response.exist">
+        <span class="material-symbols-outlined">error</span>
+        {{ response.message }}
+    </div>
+
 </div>

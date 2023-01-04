@@ -1,90 +1,98 @@
-* {
-    margin: 3px;
-    padding: 3px;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
-    width: 100vw;
-
-    .form {
+.container{
+    .intro{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: #3E5C76;
+    }
+    .form{
+        display: flex;
+        flex-direction: column;
 
-        padding: 30px 80px;
-        border-radius: 5px;
+        input[type=text], input[type=password]{
+            width: 100%;
+            padding: 10px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: none;
+            box-sizing: border-box;
+            border-radius: 20px;
+            color: #fff;
+            background-color: #1a2439;
+            transition: .2s;
 
-        h1 {
-            font-size: 2rem;
-            font-weight: 600;
+            &:hover{
+                background-color: #27324a;
+            }
+            &:focus{
+                outline: none;
+                background-color: #27324a;
+            }
         }
-        
-        input{
-            color : #F0EBD8;
-            outline: none;
-            border: 0px;
-            border-bottom: 1px solid #F0EBD8;
-            background-color: #748CAB;
-            border-radius: 5px;
-        }
-    
+
         .buttons{
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
-    
-            button {
-                color: #3E5C76;
-                border: 0px;
-                border-radius: 5px;
-                padding: 5px 10px;
-                border: 1px solid transparent;
-                margin: 5px;
-                background-color: #F0EBD8;
+            margin-top: 20px;
 
-                &:hover {
+            button{
+                width: 75%;
+                padding: 10px 10px;
+                display: inline-block;
+                border: none;
+                box-sizing: border-box;
+                border-radius: 20px;
+                color: #151515;
+                background-color: #F0EBD8;
+                transition: .2s;
+
+                &:hover{
                     cursor: pointer;
-                    border: 1px solid #1D2D44;
+                    letter-spacing: 0.5px;
+                }
+
+                &:nth-child(1){
+                    border-radius: 20px 0 0 20px;
+                    background-color: #0F71D3;
+                    color: #F0EBD8;
+                    margin-right: 5px;
+
+                    &:hover{
+                        background-color: #093969;
+                    }
+                }
+                &:nth-child(2){
+                    border-radius: 0 20px 20px 0;
+                    background-color: #F0EBD8;
+                    color: #151515;
+
+                    &:hover{
+                        background-color: #777775;
+                    }
                 }
             }
         }
-    
-        .loading {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-    
-            svg{
-                justify-self: center;
-                width: 50px;
-                height: 50px;
-                display: inline-block;
-            }
-        }
-    
-        .response {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-    
-            &.error {
-                color: red;
-            }
-            &.succes {
-                color: green;
-            }
-        }
+    }
 
+    .loading{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .error{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        color: #F0EBD8;
+        font-size: 12px;
+    }
+
+    .material-symbols-outlined{
+        margin-right: 5px;
+        font-size: 1.8em;
     }
 }
-
