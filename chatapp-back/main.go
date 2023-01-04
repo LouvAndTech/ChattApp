@@ -40,7 +40,6 @@ func main() {
 	)
 
 	app.OnModelAfterCreate().Add(func(e *core.ModelEvent) error {
-		log.Println(e.Model.TableName())
 		if e.Model.TableName() == "users" {
 			log.Println("users created")
 			record, err := app.Dao().FindRecordById("users", e.Model.GetId())

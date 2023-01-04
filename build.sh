@@ -36,7 +36,7 @@ then
     npm install
     ng build --configuration=production
     cd ..
-    DOCKERFILE = 'Dockerfile.localAngular'
+    DOCKERFILE='Dockerfile.noAngular'
 elif [ $1 = '--dockerAngular' ] || [ $1 = '-dr' ];
 then
     echo ">>>Build Frontend in Docker"
