@@ -1,15 +1,14 @@
 .container {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    width: 100vw;
-    height: 10vh;
     justify-content: center;
     align-items: center;
-    align-content: space-between;
+    margin-bottom: 20px;
 
     h1 {
         size: 1.8rem;
+        color: #fff;
+        text-align: center;
     }
 
     button {

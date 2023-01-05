@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MsgThreadComponent } from './home/msg-thread/msg-thread.component';
 import { NewMessageComponent } from './home/new-message/new-message.component';
+import { MenuComponent } from './home/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NewMessageComponent } from './home/new-message/new-message.component';
     HomeComponent,
     NavbarComponent,
     MsgThreadComponent,
-    NewMessageComponent
+    NewMessageComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

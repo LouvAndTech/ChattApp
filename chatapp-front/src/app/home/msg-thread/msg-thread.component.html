@@ -1,42 +1,17 @@
 <div class="container" (scroll)="onScroll()" #messageContainer>
-
     <!-- Loading message  -->
     <div class="loading" *ngIf="!allMessagesLoaded">
-        <svg *ngIf="loading" version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-        viewBox="0 0 50 75" enable-background="new 0 0 0 0" xml:space="preserve">
-        <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
-            <animate
-            attributeName="opacity"
-            dur="1s"
-            values="0;1;0"
-            repeatCount="indefinite"
-            begin="0.1"/>    
-        </circle>
-        <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
-            <animate
-            attributeName="opacity"
-            dur="1s"
-            values="0;1;0"
-            repeatCount="indefinite" 
-            begin="0.2"/>       
-        </circle>
-        <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
-            <animate
-            attributeName="opacity"
-            dur="1s"
-            values="0;1;0"
-            repeatCount="indefinite" 
-            begin="0.3"/>     
-        </circle>
-        </svg>
-        <button *ngIf="!loading" (click)="loadMore()">Load more messages</button>
+        <img *ngIf="loading" src="https://samherbert.net/svg-loaders/svg-loaders/oval.svg">
     </div>
     
     <div *ngFor="let msg of messages" class="message {{(msg.author.id==pb.authStore.model!.id)?'user':'other'}}">
         <div class="header">
             <div class="avatar" style="background-image: url('{{msg.author.avatar}}');"></div>
-            <h5>{{msg.author.name}}</h5>
+            <!-- <h5>{{msg.author.name}}</h5> -->
         </div>
-        <p>{{msg.message}}</p>
+        <div class="text">
+            <span class="author">{{msg.author.name}}</span>
+            <p>{{msg.message}}</p>
+        </div>
     </div>
 </div>
