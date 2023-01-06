@@ -1,12 +1,7 @@
 package main
 
 import (
-	"encoding/json"
-	"errors"
-	"io"
-	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
@@ -28,6 +23,7 @@ func defaultPublicDir() string {
 var app = pocketbase.New()
 
 func main() {
+	log.Println("Pocketbase version:", pocketbase.Version)
 
 	var publicDirFlag string
 
@@ -39,18 +35,38 @@ func main() {
 		"the directory to serve static files",
 	)
 
-	app.OnModelAfterCreate().Add(func(e *core.ModelEvent) error {
-		if e.Model.TableName() == "users" {
+	app.OnRecordAfterCreateRequest().Add(func(e *core.RecordCreateEvent) error {
+
+		// On user creation, add a cat avatar to the user
+		if e.Record.TableName() == "users" {
 			log.Println("users created")
-			record, err := app.Dao().FindRecordById("users", e.Model.GetId())
+
+			e.Record.Set("avatar", getCatImg(e.Record.GetId()))
+
+			if err := app.Dao().SaveRecord(e.Record); err != nil {
+				return err
+			}
+		}
+
+		return nil
+	})
+
+	app.OnRecordBeforeCreateRequest().Add(func(e *core.RecordCreateEvent) error {
+		if e.Record.TableName() == "messages" {
+			log.Println("messages created")
+
+			checkResults, err := profanityCheck(e.Record.Get("field").(string))
 			if err != nil {
 				return err
 			}
 
-			record.Set("avatar", getCatImg(e.Model.GetId()))
-
-			if err := app.Dao().SaveRecord(record); err != nil {
-				return err
+			if checkResults {
+				log.Println("Toxic message detected !")
+				e.Record.Set("user", "v5w8gdo3t5909nm")
+				e.Record.Set("field", "This message has been deleted because it is toxic.")
+				if err := app.Dao().SaveRecord(e.Record); err != nil {
+					return err
+				}
 			}
 		}
 		return nil
@@ -65,68 +81,4 @@ func main() {
 	if err := app.Start(); err != nil {
 		log.Fatal(err)
 	}
-}
-
-type CatImg struct {
-	Id     string `json:"id"`
-	Url    string `json:"url"`
-	With   int    `json:"width"`
-	Height int    `json:"height"`
-}
-
-func getCatImg(userId string) string {
-	response, err := http.Get("https://api.thecatapi.com/v1/images/search")
-	if err != nil {
-		return "nil"
-	}
-
-	data, _ := ioutil.ReadAll(response.Body)
-
-	var rep []CatImg
-
-	err = json.Unmarshal(data, &rep)
-	if err != nil {
-		log.Println(err)
-	}
-
-	path, _ := os.Getwd()
-
-	if err := os.MkdirAll("pb_data/storage/_pb_users_auth_/"+userId, os.ModePerm); err != nil {
-		log.Fatal(err)
-	}
-
-	err = downloadFile(rep[0].Url, path+"/pb_data/storage/_pb_users_auth_/"+userId+"/cat"+rep[0].Id+".jpg")
-	if err != nil {
-		log.Println(err)
-	}
-
-	return ("cat" + rep[0].Id + ".jpg")
-
-}
-
-func downloadFile(URL, fileName string) error {
-	//Get the response bytes from the url
-	response, err := http.Get(URL)
-	if err != nil {
-		return err
-	}
-	defer response.Body.Close()
-
-	if response.StatusCode != 200 {
-		return errors.New("Received non 200 response code")
-	}
-	//Create a empty file
-	file, err := os.Create(fileName)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	//Write the bytes to the fiel
-	_, err = io.Copy(file, response.Body)
-	if err != nil {
-		return err
-	}
-
-	return nil
 }
