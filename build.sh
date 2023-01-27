@@ -53,7 +53,7 @@ then
     echo "Build for Multi-Arch"
     #Build for Multi-Arch
     docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t louvandtech/chat-app --push -f $DOCKERFILE .
-elif [ $1 = '--active' ] || [ $1 = '-a' ];
+elif [ $2 = '--active' ] || [ $2 = '-a' ];
 then
     echo "Build for active Arch"
     #Build for active Arch
