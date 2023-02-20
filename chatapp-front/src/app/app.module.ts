@@ -5,20 +5,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { MsgThreadComponent } from './home/msg-thread/msg-thread.component';
-import { NewMessageComponent } from './home/new-message/new-message.component';
+import { MsgThreadComponent } from './home/main-thread/msg-thread/msg-thread.component';
+import { NewMessageComponent } from './home/main-thread/new-message/new-message.component';
 import { MenuComponent } from './home/menu/menu.component';
+import { AboutComponent } from './about/about.component';
+import { MainThreadComponent } from './home/main-thread/main-thread.component';
+import { ProfileComponent } from './home/profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     HomeComponent,
-    NavbarComponent,
     MsgThreadComponent,
     NewMessageComponent,
-    MenuComponent
+    MenuComponent,
+    AboutComponent,
+    MainThreadComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

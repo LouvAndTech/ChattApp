@@ -1,5 +1,5 @@
 <div class="container">
-    <input type="checkbox" name="" id="" class="check">
+    <input type="checkbox" name="" id="" class="check" (click)="openMenu()">
     <div class="ham-menu">
         <span class="line line1"></span>
         <span class="line line2"></span>
@@ -7,4 +7,14 @@
     </div>
     <h3>Le Moulin Chat</h3>
     <button (click)="logOut()">Log Out</button>
+</div>
+<div class="opened" *ngIf="opened" >
+    <div class="menu">
+        <div class="menu-item" (click)="setState('mainThread')">
+            <a href="#">Main Thread</a>
+        </div>
+        <div class="menu-item">
+            <a href="#">About</a>
+        </div>
+    </div>
 </div>

@@ -83,6 +83,11 @@ export class MsgThreadComponent implements OnInit {
     }
   }
 
+  //Go to user profile
+  gotouser(id : string){
+    pb.router.navigate('/profile/'+id);
+  }
+
   async loadMore(){
     //fetch the next 10 messages
     this.loading = true;

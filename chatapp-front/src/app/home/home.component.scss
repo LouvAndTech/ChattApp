@@ -4,30 +4,30 @@
     box-sizing: border-box;
     overflow: hidden;
     display: flex;
-    flex-direction: column;
-}
+    flex-flow: column;
+    
+    app-menu{
+        flex-shrink: 0;
+        z-index: 1000;
+        width: 100%;
+        height: 10vh;
+        position: relative;
+    }
 
-app-msg-thread{
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
 
-    &::-webkit-scrollbar {
-        display: none;
+    .main-container{
+        flex-shrink: 1;
+        z-index: 900;
+        width: 100%;
+        height: 90vh;
+        position: relative;
+
+        
+        app-main-thread{
+            all: inherit;
+        }
     }
 }
+    
+    
 
-app-new-message{
-    width: 100%;
-    height: 7vh;
-    position: relative;
-}
-
-app-menu{
-    width: 100%;
-    height: 10vh;
-    position: relative;
-}

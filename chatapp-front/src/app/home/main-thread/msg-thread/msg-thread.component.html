@@ -4,7 +4,7 @@
         <img *ngIf="loading" src="https://samherbert.net/svg-loaders/svg-loaders/oval.svg">
     </div>
     
-    <div *ngFor="let msg of messages" class="message {{(msg.author.id==pb.authStore.model!.id)?'user':'other'}}">
+    <div *ngFor="let msg of messages" class="message {{(msg.author.id==pb.authStore.model!.id)?'user':'other'}}" (click)="gotouser()">
         <div class="header">
             <div class="avatar" style="background-image: url('{{msg.author.avatar}}');"></div>
             <!-- <h5>{{msg.author.name}}</h5> -->
