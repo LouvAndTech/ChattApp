@@ -1,4 +1,5 @@
 import { Component} from '@angular/core';
+import { Router } from '@angular/router';
 import { pb } from 'src/main'
 
 @Component({
@@ -13,6 +14,8 @@ export class AuthComponent{
     exist : false,
   };
   loading : boolean = false;
+  
+  constructor(private router : Router) { }
 
   async login(username : string ,pass : string) {
     this.loading = true;
@@ -20,6 +23,8 @@ export class AuthComponent{
     try {
       await pb.collection('users').authWithPassword(username,pass);
       this.response = generateResponse(true);
+      this.router.navigate(['/home']);
+      
     } catch (error) {
       this.response = generateResponse(false);
     }
