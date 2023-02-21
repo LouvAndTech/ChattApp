@@ -13,7 +13,17 @@ export class AppComponent implements OnInit{
   pb = pb
 
   constructor(private router: Router) {
-    this.router.events.subscribe((event) => {
+
+    this.router.events.subscribe((event) => this.onRouteChange(event));
+  }
+
+  ngOnInit(){
+    pb.authStore.clear();
+    console.log(window.location.href);
+    console.log("Hello from Angular app.component.ts");
+  }
+
+  onRouteChange(event: any) {
       if (event instanceof NavigationEnd) { //If the user try to change route
         if(event.url != '/login'){ //If the route isn't the login page
           if (!pb.authStore.isValid) { //If the user isn't logged in
@@ -21,13 +31,7 @@ export class AppComponent implements OnInit{
           }
         }
       }
-    });
-  }
-  ngOnInit(){
-    pb.authStore.clear();
-    console.log(window.location.href);
-    console.log("Hello from Angular app.component.ts");
-  }
+    }
 
 }
 

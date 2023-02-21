@@ -57,7 +57,3 @@ function generateResponse(state : boolean , log : boolean = true) : any{
     exist : true,
   };
 }
-
-export function logOut(){
-  pb.authStore.clear();
-}
